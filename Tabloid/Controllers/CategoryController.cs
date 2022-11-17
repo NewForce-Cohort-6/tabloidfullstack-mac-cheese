@@ -40,8 +40,10 @@ namespace Tabloid.Controllers
 
         // POST api/<CategoryController>
         [HttpPost]
-        public void Post([FromBody] string value)
+         public IActionResult Add(Category category) 
         {
+            _categoryRepository.Add(category);
+            return CreatedAtAction("Get", new { id = category.Id }, category);
         }
 
         // PUT api/<CategoryController>/5
