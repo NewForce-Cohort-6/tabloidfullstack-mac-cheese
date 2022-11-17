@@ -9,7 +9,7 @@ const Category = ({category}) => {
 
 
     return (
-        <div style={{display:'flex', letterSpacing: '.5px', alignItems: 'center', margin: '45px', borderBottom: '1px solid gray', height: '30px', width: '500px', justifyContent: 'space-between'}}>
+        <div style={{display:'flex', letterSpacing: '.5px', alignItems: 'center', margin: '15px', borderBottom: '1px solid gray', height: '30px', width: '500px', justifyContent: 'space-between'}}>
             <h5 style={{ marginRight: '15px' }}>{category.name}</h5>
         </div>
     )

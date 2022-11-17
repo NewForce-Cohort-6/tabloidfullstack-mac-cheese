@@ -25,10 +25,10 @@ const CategoryList = () => {
     return (
       <div className="container">
         <div className="row justify-content-center" style={{display: 'flex', flexDirection: 'column'}}>
-          <h4 style={{marginTop: '20px'}}>Categories</h4>
+          <h4 style={{marginTop: '20px', marginBottom: '15px'}}>Categories</h4>
           <button onClick={(e) => {
             navigate('/createCategory')
-          }} style={{marginTop: '15px', width: '120px'}}
+          }} style={{width: '120px', marginBottom: '25px'}}
           >New Category</button>
             <div className="cards-column">
                 {categories.map((c) => (
