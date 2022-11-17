@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import Category from "./Category";
-import { getAllCategories } from "./CategoryManager";
+import { getAllCategories, getById } from "./CategoryManager";
 
 const CategoryList = () => {
     const [categories, setCategories] = useState([]);
@@ -16,6 +16,11 @@ const CategoryList = () => {
         getCategories();
     }, []);
 
+    const handleDeleteClick = (id) => {
+      getById(id).then((e) => {navigate(`/deleteCategory/${id}`)})
+  }
+
+
     
     return (
       <div className="container">
@@ -27,7 +32,13 @@ const CategoryList = () => {
           >New Category</button>
             <div className="cards-column">
                 {categories.map((c) => (
+                  <div style={{display: 'flex'}}>
                     <Category key={c.id} category={c} />
+                    <button onClick={(e) => {
+                      handleDeleteClick(c.id)
+                    }} style={{width: '60px', height: '30px', margin: '5px'}}>Delete</button>
+                    <button style={{width: '43px', height: '30px', margin: '5px'}}> Edit </button>
+                    </div>
                     ))}
         </div>
       </div>

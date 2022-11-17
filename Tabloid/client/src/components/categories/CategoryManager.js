@@ -13,3 +13,13 @@ export const addCategory = (category) => {
         body: JSON.stringify(category),
       })
 }
+
+export const deleteCategory = (id) => {
+  return fetch(`https://localhost:5001/api/Category/${id}`, {
+    method: "DELETE"
+  })
+}
+
+export const getById = (id) => {
+  return fetch(`https://localhost:5001/api/Category/${id}`).then((res) => res.json());
+}
