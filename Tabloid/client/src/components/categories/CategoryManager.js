@@ -1,0 +1,5 @@
+
+export const getAllCategories = () => {
+    return fetch(`https://localhost:5001/api/Category`)
+    .then((res) => res.json())
+};
