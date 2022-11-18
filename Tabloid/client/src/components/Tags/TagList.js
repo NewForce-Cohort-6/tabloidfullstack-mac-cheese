@@ -23,11 +23,11 @@ return (
     
     <div className="container">
       <div className="row justify-content-center" style={{display: 'flex', flexDirection: 'column'}}>
-      <h4 style={{marginTop: '20px', marginBottom: '15px'}}>Categories</h4>
+      <h4 style={{marginTop: '20px', marginBottom: '15px'}}>Tags</h4>
           <button onClick={(e) => {
             navigate('/createTag')
           }} style={{width: '120px', marginBottom: '25px'}}
-          >New Tag</button>
+          >Create New Tag</button>
         <div className="cards-column">
           {tags.map((tag) => (
             <Tag key={tag.id} tag={tag} />
