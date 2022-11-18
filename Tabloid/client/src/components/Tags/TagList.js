@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { getAllTags } from "./TagManagement";
+import { getAllTags, getById } from "./TagManagement";
 import Tag from "./Tag";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const TagList = () => {
     },[]);
 
     const deleteTag = (id) => {
-      getBy
+      getById(id).then((e) => {navigate(`/deleteTag/${id}`)})
     }
 
 
@@ -34,8 +34,12 @@ return (
           >Create New Tag</button>
         <div className="cards-column">
           {tags.map((tag) => (
+            <div style={{display: 'flex'}}>
             <Tag key={tag.id} tag={tag} />
+            <button onClick={(e) => {deleteTag(tag.id)}}style={{width: '60px', height: '30px', margin: '5px'}}>Delete</button>
+          </div>
           ))}
+          
         </div>
       </div>
     </div>

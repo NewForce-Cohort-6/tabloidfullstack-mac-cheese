@@ -4,7 +4,7 @@ export const getAllTags = () => {
 };
 export const getById = (id) => {
   return fetch(`https://localhost:5001/api/Tag/${id}`)
-  .then
+  .then((res)=> res.json())
 }
 export const addTag = (tag) => {
     return fetch(`https://localhost:5001/api/Tag`, {
