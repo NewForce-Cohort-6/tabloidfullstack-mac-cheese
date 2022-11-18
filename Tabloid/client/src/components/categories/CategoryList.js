@@ -20,6 +20,10 @@ const CategoryList = () => {
       getById(id).then((e) => {navigate(`/deleteCategory/${id}`)})
   }
 
+    const handleEditClick = (id) => {
+      getById(id).then((e) => {navigate(`/editCategory/${id}`)})
+  }
+
 
     
     return (
@@ -37,7 +41,9 @@ const CategoryList = () => {
                     <button onClick={(e) => {
                       handleDeleteClick(c.id)
                     }} style={{width: '60px', height: '30px', margin: '5px'}}>Delete</button>
-                    <button style={{width: '43px', height: '30px', margin: '5px'}}> Edit </button>
+                    <button onClick={(e) => {
+                      handleEditClick(c.id)
+                    }} style={{width: '43px', height: '30px', margin: '5px'}}> Edit </button>
                     </div>
                     ))}
         </div>
