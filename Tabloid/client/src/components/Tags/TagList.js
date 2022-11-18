@@ -16,6 +16,10 @@ const TagList = () => {
         getTags();
     },[]);
 
+    const deleteTag = (id) => {
+      getBy
+    }
+
 
 
 return (
