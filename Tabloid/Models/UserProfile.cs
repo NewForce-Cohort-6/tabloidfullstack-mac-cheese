@@ -33,6 +33,9 @@ namespace Tabloid.Models
         public string ImageLocation { get; set; }
 
         [Required]
+        public bool IsActive { get; set; }
+
+        [Required]
         public int UserTypeId { get; set; }
         public UserType UserType { get; set; }
 
