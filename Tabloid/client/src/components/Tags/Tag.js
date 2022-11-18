@@ -5,7 +5,7 @@ const Tag = ({tag}) => {
     <h5 style={{ marginRight: '15px' }}>{tag.name}</h5>
     <div style={{display: 'flex'}}>
         <button style={{margin: '5px'}}>Edit</button>
-        <button style={{margin: '5px'}}>Delete</button>
+        
     </div>
 </div>
 )
