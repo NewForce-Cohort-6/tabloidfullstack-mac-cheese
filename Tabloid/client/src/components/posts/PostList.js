@@ -21,7 +21,7 @@ const PostList = () => {
       <div className="container">
         <div className="row justify-content-center" style={{display: 'flex', flexDirection: 'column'}}>
           <h4 style={{marginTop: '20px', marginBottom: '15px'}}>Posts</h4>
-          
+          {/* <strong>Title</strong><strong>Author</strong><strong>Category</strong> */}
             <div className="cards-column">
                 {posts.map((p) => (
                   <div style={{display: 'flex'}}>

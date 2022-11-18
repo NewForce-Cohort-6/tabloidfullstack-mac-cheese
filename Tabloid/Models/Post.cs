@@ -23,5 +23,10 @@ namespace Tabloid.Models
 
         public UserProfile UserProfile { get; set; }
 
+        [Required]
+        public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
+
     }
 }

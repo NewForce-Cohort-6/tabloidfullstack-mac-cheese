@@ -6,7 +6,7 @@ namespace Tabloid.Repositories
 {
     public interface IPostRepository
     {
-        List<Post> GetAll();
+       public List<Post> GetAll();
 
     }
 }
