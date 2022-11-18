@@ -36,6 +36,18 @@ namespace Tabloid.Controllers
             return Ok(user);
         }
 
+        // GET api/<UserProfileController>/5
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var user = _userRepository.GetById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
