@@ -27,7 +27,10 @@ export default function Header({isLoggedIn, setIsLoggedIn}) {
             <div style={{display: 'flex'}}>
               <NavItem>
                 <NavLink tag={RRNavLink} to="/">Home</NavLink>
-              </NavItem>
+                              </NavItem>
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/posts">Posts</NavLink>
+               </NavItem>
               <NavItem>
                 <NavLink tag={RRNavLink} to="/categories">Category Management</NavLink>
               </NavItem>
