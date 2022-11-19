@@ -4,6 +4,9 @@ import CategoryDelete from "./categories/CategoryDelete";
 import CategoryEdit from "./categories/CategoryEdit";
 import CategoryForm from "./categories/CategoryForm";
 import CategoryList from "./categories/CategoryList";
+import  PostList from "./posts/PostList";
+
+// import { Post } from "./posts/Post";
 import Hello from "./Hello";
 import TagDelete from "./Tags/TagDelete";
 import TagForm from "./Tags/TagForm";
@@ -22,6 +25,7 @@ export default function ApplicationViews() {
         <Route path="/tags" element={<TagList />} />
         <Route path="/users" element={<UserProfileList />} />
         <Route path="/createTag" element= { <TagForm />} />
+        <Route path="/posts" element={<PostList />} />
         <Route path="/deleteTag/:id" element={<TagDelete />} />
         
         

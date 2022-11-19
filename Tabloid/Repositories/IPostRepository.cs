@@ -6,7 +6,9 @@ namespace Tabloid.Repositories
 {
     public interface IPostRepository
     {
-        List<Post> GetAll();
-        List<Post> GetAllWithComments();
+    
+       List<Post> GetAllWithComments();
+       public List<Post> GetAll();
+
     }
 }
