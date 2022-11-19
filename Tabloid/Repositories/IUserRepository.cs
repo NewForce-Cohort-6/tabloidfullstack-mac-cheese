@@ -9,5 +9,6 @@ namespace Tabloid.Repositories
         void Add(UserProfile userProfile);
         UserProfile GetByEmail(string email);
         UserProfile GetById(int id);
+        void UpdateActive(UserProfile user);
     }
 }
