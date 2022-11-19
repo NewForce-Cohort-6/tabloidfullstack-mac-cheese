@@ -49,8 +49,8 @@ namespace Tabloid.Controllers
         }
 
         // PUT api/<UserProfileController>/5
-        [HttpPatch("{id}")]
-        public IActionResult Patch(int id, UserProfile user)
+        [HttpPut("{id}")]
+        public IActionResult UpdateActive(int id, UserProfile user)
         {
             _userRepository.UpdateActive(user);
             return Ok(user);

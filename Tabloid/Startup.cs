@@ -29,7 +29,7 @@ namespace Tabloid
 
            services.AddTransient<ITagRepository, TagRepository>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddSwaggerGen(c =>
             {

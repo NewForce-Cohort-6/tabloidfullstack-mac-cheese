@@ -1,42 +1,82 @@
 import React from "react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const UserProfile = ({user}) => {
+const UserProfile = ({user, get}) => {
+
     const navigate = useNavigate();
 
     //Perform a patch to update isActive state when button is clicked
-console.log(user.id)
-    const handleActive = (e) => {
-        fetch(`https://localhost:5001/api/UserProfile/${user.id}`, {
-          method: "PATCH",
+console.log(user)
+    const handleActive = () => {
+
+        //object to be updated
+        const updatedUser = {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            displayName: user.displayName,
+            email: user.email,
+            createDateTime: user.createDateTime,
+            imageLocation: user.imageLocation,
+            isActive: false,
+            userTypeId: user.userTypeId,
+            userType: {
+                id: user.userType.id,
+                name: user.userType.name
+            },
+            fullName: user.fullName
+
+        }
+
+
+        return fetch(`https://localhost:5001/api/UserProfile/${user.id}`, {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ IsActive:false }),
+          body: JSON.stringify(updatedUser),
         })
           .then((response) => response.json())
-          .then(() =>
-            navigate("/users")
+          .then((users) =>
+           get(users)
           );
       };
 
     const handleNotActive = () => {
+
+        //object to be updated
+        const updatedUser = {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            displayName: user.displayName,
+            email: user.email,
+            createDateTime: user.createDateTime,
+            imageLocation: user.imageLocation,
+            isActive: true,
+            userTypeId: user.userTypeId,
+            userType: {
+                id: user.userType.id,
+                name: user.userType.name
+            },
+            fullName: user.fullName
+
+        }
+
+
         return fetch(`https://localhost:5001/api/UserProfile/${user.id}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({isActive: true}), })
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedUser), })
         .then((response) => response.json())
-        .then(() => {
-            navigate("/users")
+        .then((users) => {
+            get(users)
         })
       }
 
-
-    console.log(user)
     return (
         <div style={{ width: '20%', borderBottom: 'solid 1px gray'}}>
             <Link to={`/users/${user.id}`}>

@@ -22,7 +22,7 @@ const UserProfileList = () => {
         <div style={{display: 'flex', flexDirection: 'column',margin: '15px'}}>
             {users.map((u) => (
                 <div style={{margin: '20px'}}>
-                    <UserProfile key={u.id} user={u}/>
+                    <UserProfile key={u.id} user={u} get={getUsers}/>
                 </div>
             ))}
         </div>
