@@ -44,6 +44,17 @@ namespace Tabloid.Controllers
             return Ok(posts);
         }
 
+        [HttpGet("GetWithComments/{id}")]
+        public IActionResult GetWithComments(int id)
+        {
+            var post = _postRepository.GetByIdWithComments(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return Ok(post);
+        }
+
         // PUT api/<PostController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
