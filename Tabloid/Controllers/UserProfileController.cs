@@ -48,6 +48,14 @@ namespace Tabloid.Controllers
             return Ok(user);
         }
 
+        // PUT api/<UserProfileController>/5
+        [HttpPut("{id}")]
+        public IActionResult UpdateActive(int id, UserProfile user)
+        {
+            _userRepository.UpdateActive(user);
+            return Ok(user);
+        }
+
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
