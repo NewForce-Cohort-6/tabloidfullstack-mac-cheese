@@ -11,10 +11,10 @@ import Hello from "./Hello";
 import TagDelete from "./Tags/TagDelete";
 import TagForm from "./Tags/TagForm";
 import TagList from "./Tags/TagList";
+import UserProfileDetails from "./userProfiles/UserProfileDetail";
 import UserProfileList from "./userProfiles/UserProfileList";
 import PostDetails from "./posts/PostDetails";
 
-export default function ApplicationViews() {
   return (
     <Routes>
       <Route path="/" element={<Hello />} />
@@ -22,6 +22,7 @@ export default function ApplicationViews() {
       <Route path="/createCategory" element={<CategoryForm />} />
       <Route path="/deleteCategory/:id" element={<CategoryDelete />} />
       <Route path="/editCategory/:id" element={<CategoryEdit />} />
+      <Route path="/users/:id" element={<UserProfileDetails />} />
       <Route path="/tags" element={<TagList />} />
       <Route path="/users" element={<UserProfileList />} />
       <Route path="/createTag" element={<TagForm />} />

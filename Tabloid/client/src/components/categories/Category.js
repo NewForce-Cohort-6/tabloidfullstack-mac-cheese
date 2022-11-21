@@ -15,4 +15,5 @@ const Category = ({category}) => {
     )
 }
 
+
 export default Category;
