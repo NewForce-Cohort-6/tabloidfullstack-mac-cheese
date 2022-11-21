@@ -4,14 +4,16 @@ import CategoryDelete from "./categories/CategoryDelete";
 import CategoryEdit from "./categories/CategoryEdit";
 import CategoryForm from "./categories/CategoryForm";
 import CategoryList from "./categories/CategoryList";
-import  PostList from "./posts/PostList";
+import PostList from "./posts/PostList";
 
 // import { Post } from "./posts/Post";
 import Hello from "./Hello";
 import TagDelete from "./Tags/TagDelete";
 import TagForm from "./Tags/TagForm";
 import TagList from "./Tags/TagList";
+import UserProfileDetails from "./userProfiles/UserProfileDetail";
 import UserProfileList from "./userProfiles/UserProfileList";
+
 import TagEdit from "./Tags/TagEdit";
 
 export default function ApplicationViews() {
@@ -29,9 +31,11 @@ export default function ApplicationViews() {
         <Route path="/posts" element={<PostList />} />
         <Route path="/deleteTag/:id" element={<TagDelete />} />
         <Route path="/editTag/:id" element={<TagEdit />} />
+        <Route path="posts/:id" element={<PostDetails />} />
         
         
       </Routes>
    );
  
+
 }

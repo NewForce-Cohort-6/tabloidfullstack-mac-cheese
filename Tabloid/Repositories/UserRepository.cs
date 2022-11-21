@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 using Tabloid.Models;
 using Tabloid.Utils;
@@ -48,6 +49,52 @@ namespace Tabloid.Repositories
 
                     return users;
 
+                }
+            }
+        }
+
+        public UserProfile GetById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                          Select u.Id, u.FirstName, u.LastName, u.DisplayName, u.UserTypeId, u.Email, u.ImageLocation, u.CreateDateTime,
+
+                            ut.Id, ut.Name
+                            From UserProfile u
+                                Left Join UserType ut ON u.UserTypeId = ut.Id
+                           WHERE u.Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+
+                    var reader = cmd.ExecuteReader();
+
+                    UserProfile user = null;
+                    if (reader.Read())
+                    {
+                        user = new UserProfile()
+                        {
+                            Id = id,
+                            FirstName = DbUtils.GetString(reader, "FirstName"),
+                            LastName = DbUtils.GetString(reader, "LastName"),
+                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                            ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
+                            UserType = new UserType()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                Name = DbUtils.GetString(reader, "Name")
+                            },
+                        };
+                    }
+
+                    reader.Close();
+
+                    return user;
                 }
             }
         }
