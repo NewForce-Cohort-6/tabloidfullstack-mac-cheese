@@ -22,7 +22,8 @@ const PostDetails = () => {
       <div className="row justify-content-center">
         <div className="col-sm-12 col-lg-6">
           <Post post={post} />
-          <Liost.comments.map((c) => (
+          <ListGroup>
+            {post.comments.map((c) => (
               <ListGroupItem>
                 <table>
                     <tr>
@@ -38,8 +39,7 @@ const PostDetails = () => {
                         <td>{c.createDateTime}</td>
                     </tr>
                 </table>
-              </ListGroupItemstGroup>
-            {p>
+              </ListGroupItem>
             ))}
           </ListGroup>
         </div>
