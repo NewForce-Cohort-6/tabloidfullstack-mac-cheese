@@ -9,7 +9,7 @@ namespace Tabloid.Repositories
        List<Post> GetAllWithComments();
        public List<Post> GetAll();
 
-        //List<Post> GetAllUsersPosts(int userProfileId);
+        List<Post> GetUserPosts(int userProfileId);
 
        public Post GetByIdWithComments(int id);
 

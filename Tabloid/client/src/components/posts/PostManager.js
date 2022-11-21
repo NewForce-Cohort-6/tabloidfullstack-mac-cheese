@@ -2,6 +2,9 @@ import React from "react";
 
 // const baseUrl = '/api/post';
 
+const currentUser = localStorage.getItem("userProfile");
+console.log(currentUser)
+
 export const getAllPosts = () => {
   return fetch(`https://localhost:5001/api/Post`).then((res) => res.json());
 };
