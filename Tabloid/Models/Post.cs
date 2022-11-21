@@ -22,6 +22,7 @@ namespace Tabloid.Models
         public int UserProfileId { get; set; }
 
         public UserProfile UserProfile { get; set; }
+        public List<Comment> Comments { get; set; }
 
         [Required]
         public int CategoryId { get; set; }

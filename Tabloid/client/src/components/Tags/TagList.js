@@ -20,6 +20,10 @@ const TagList = () => {
       getById(id).then((e) => {navigate(`/deleteTag/${id}`)})
     }
 
+    const handleEditClick = (id) => {
+      getById(id).then((e) => {navigate(`/editTag/${id}`)})
+  }
+
 
 
 return (
@@ -37,7 +41,11 @@ return (
             <div style={{display: 'flex'}}>
             <Tag key={tag.id} tag={tag} />
             <button onClick={(e) => {deleteTag(tag.id)}}style={{width: '60px', height: '30px', margin: '5px'}}>Delete</button>
+            <button onClick={(e) => {
+                      handleEditClick(tag.id)
+                    }} style={{width: '43px', height: '30px', margin: '5px'}}> Edit </button>
           </div>
+          
           ))}
           
         </div>
