@@ -7,6 +7,6 @@ namespace Tabloid.Repositories
     public interface IPostRepository
     {
        public List<Post> GetAll();
-
+        //List<Post> GetAllUsersPosts(int userProfileId);
     }
 }
