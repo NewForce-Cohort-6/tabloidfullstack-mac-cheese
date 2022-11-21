@@ -12,6 +12,7 @@ import TagDelete from "./Tags/TagDelete";
 import TagForm from "./Tags/TagForm";
 import TagList from "./Tags/TagList";
 import UserProfileList from "./userProfiles/UserProfileList";
+import TagEdit from "./Tags/TagEdit";
 
 export default function ApplicationViews() {
 
@@ -27,6 +28,7 @@ export default function ApplicationViews() {
         <Route path="/createTag" element= { <TagForm />} />
         <Route path="/posts" element={<PostList />} />
         <Route path="/deleteTag/:id" element={<TagDelete />} />
+        <Route path="/editTag/:id" element={<TagEdit />} />
         
         
       </Routes>

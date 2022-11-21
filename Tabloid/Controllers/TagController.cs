@@ -42,6 +42,12 @@ namespace Tabloid.Controllers
             _tagRepository.Delete(id);
             return NoContent();
         }
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, Tag tag)
+        {
+            _tagRepository.Update(tag);
+            return Ok(tag);
+        }
 
     }
 }
