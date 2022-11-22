@@ -13,6 +13,7 @@ export default function Login({setIsLoggedIn}) {
     e.preventDefault();
     login({email, password})
       .then(r =>{
+        console.log("this is response", r)
       if(r){
       setIsLoggedIn(true)
       navigate('/')

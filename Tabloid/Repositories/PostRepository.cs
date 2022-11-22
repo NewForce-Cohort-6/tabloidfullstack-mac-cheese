@@ -149,8 +149,8 @@ namespace Tabloid.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                SELECT p.Id AS PostId, p.Title, p.Content, p.CreateDateTime AS PostDateCreated, p.PublishDateTime,  
-                       p.ImageLocation AS PostImageUrl, p.CategoryId, p.UserProfileId, 
+             SELECT p.Id AS PostId, p.Title, p.Content, p.CreateDateTime AS PostDateCreated, p.PublishDateTime,  
+                       p.ImageLocation AS PostImageUrl, p.CategoryId, p.UserProfileId, p.IsApproved,
 
                        up.FirstName, up.LastName, up.DisplayName, up.Email, up.CreateDateTime AS UserProfileDateCreated, 
                        up.ImageLocation AS UserProfileImageUrl,
@@ -159,9 +159,10 @@ namespace Tabloid.Repositories
                   FROM Post p 
                        LEFT JOIN UserProfile up ON p.UserProfileId = up.id
                        LEFT JOIN Category c ON p.CategoryId = c.id               
-                    WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
+                    WHERE p.PublishDateTime < SYSDATETIME()
                         AND p.UserProfileId = @UserProfileId
-                        ORDER By PublishDateTime DESC";
+
+                        ORDER By p.PublishDateTime DESC  ";
 
                     cmd.Parameters.AddWithValue("@UserProfileId", userProfileId);
 
@@ -197,7 +198,7 @@ namespace Tabloid.Repositories
                                 Name = DbUtils.GetString(reader, "CategoryName"),
                             },
                         });
-                        posts.Add(new Post());
+                     
 
 
                     }

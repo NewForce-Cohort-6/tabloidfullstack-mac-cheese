@@ -53,7 +53,7 @@ export const Post = ({ post }) => {
         margin: "15px",
         flexDirection: "row",
         borderBottom: "1px solid gray",
-        height: "30px",
+        height: "px",
         width: "500px",
         justifyContent: "space-between",
       }}
@@ -68,3 +68,6 @@ export const Post = ({ post }) => {
 };
 
 export default Post;
+
+
+
