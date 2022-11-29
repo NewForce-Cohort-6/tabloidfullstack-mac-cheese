@@ -23,8 +23,9 @@ export const CommentNew = () => {
       subject: newComment.subject,
       content: newComment.content,
       userProfileId: currentUser.id,
-      postId: id,
+      postId: parseInt(id),
     };
+    debugger;
     AddComment(commentToSend).then((t) => {
       navigate(`/posts/${id}`);
     });
