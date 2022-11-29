@@ -157,10 +157,11 @@ namespace Tabloid.Repositories
                        up.FirstName, up.LastName, up.Email, up.CreateDateTime AS UserProfileDateCreated, 
                        up.ImageLocation AS UserProfileImageUrl, up.DisplayName,
 
-                       c.Id AS CommentId, c.UserProfileId AS CommentUserProfileId, c.Subject, c.Content, c.CreateDateTime as CommentDateCreated
+                       c.Id AS CommentId, c.UserProfileId AS CommentUserProfileId, c.Subject, c.Content, c.CreateDateTime as CommentDateCreated, u.DisplayName AS CommentDisplayName
                         FROM Post p 
                        LEFT JOIN UserProfile up ON p.UserProfileId = up.id
                        LEFT JOIN Comment c on c.PostId = p.Id
+                       LEFT JOIN UserProfile u ON c.UserProfileId = u.id
                        WHERE p.Id = @Id
                         ";
                     DbUtils.AddParameter(cmd, "@Id", id);
@@ -190,20 +191,26 @@ namespace Tabloid.Repositories
                                 },
                                 Comments = new List<Comment>()
                             };
-                            if (DbUtils.IsNotDbNull(reader, "CommentId"))
-                            {
-                                post.Comments.Add(new Comment()
-                                {
-                                    Id = DbUtils.GetInt(reader, "CommentId"),
-                                    PostId = id,
-                                    UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                                    Subject = DbUtils.GetString(reader, "Subject"),
-                                    Content = DbUtils.GetString(reader, "Content"),
-                                    CreateDateTime = DbUtils.GetDateTime(reader, "CommentDateCreated"),
-                                    DisplayName = DbUtils.GetString(reader, "DisplayName")
-                                });
-                            };
                         }
+                        if (DbUtils.IsNotDbNull(reader, "CommentId"))
+                        {
+                            post.Comments.Add(new Comment()
+                            {
+                                Id = DbUtils.GetInt(reader, "CommentId"),
+                                PostId = id,
+                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                                Subject = DbUtils.GetString(reader, "Subject"),
+                                Content = DbUtils.GetString(reader, "Content"),
+                                CreateDateTime = DbUtils.GetDateTime(reader, "CommentDateCreated"),
+                                DisplayName = DbUtils.GetString(reader, "DisplayName"),
+
+                                UserProfile = new UserProfile()
+                                {
+                                    Id = DbUtils.GetInt(reader, "CommentUserProfileId"),
+                                    DisplayName = DbUtils.GetString(reader, "CommentDisplayName")
+                                }
+                            });
+                        };
                     }
                     reader.Close();
                     return post;

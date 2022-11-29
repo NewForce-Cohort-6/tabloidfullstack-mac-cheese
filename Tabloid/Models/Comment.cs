@@ -16,5 +16,6 @@ namespace Tabloid.Models
         public DateTime CreateDateTime { get; set; }
         public string DisplayName { get; set; }
         public Post post { get; set; }
+        public UserProfile UserProfile { get; set; }
     }
 }
