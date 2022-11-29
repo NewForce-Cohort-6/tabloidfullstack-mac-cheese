@@ -6,8 +6,7 @@ const UserProfile = ({user, get}) => {
 
     const navigate = useNavigate();
 
-    //Perform a patch to update isActive state when button is clicked
-console.log(user)
+    //Perform a put to update isActive state when button is clicked
     const handleActive = () => {
 
         //object to be updated
@@ -83,6 +82,7 @@ console.log(user)
     <strong>{user.displayName}</strong></Link>
             <h6>User Name: {user.firstName} {user.lastName}</h6>
             <h6>UserType: {user.userType.name}</h6>
+            <button onClick={(e) => {navigate(`/editType/${user.id}`)}} style={{marginRight: "5px"}}>Edit</button>
             {user.isActive ?
             <button onClick={(e) => {
                 handleActive()
