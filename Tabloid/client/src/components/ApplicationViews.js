@@ -15,6 +15,8 @@ import UserProfileDetails from "./userProfiles/UserProfileDetail";
 import UserProfileList from "./userProfiles/UserProfileList";
 
 import TagEdit from "./Tags/TagEdit";
+import PostDetails from "./posts/PostDetails";
+import EditUserType from "./userProfiles/EditUserType";
 
 export default function ApplicationViews() {
 
@@ -32,6 +34,8 @@ export default function ApplicationViews() {
         <Route path="/deleteTag/:id" element={<TagDelete />} />
         <Route path="/editTag/:id" element={<TagEdit />} />
         <Route path="posts/:id" element={<PostDetails />} />
+        <Route path="/editType/:id" element={<EditUserType />} />
+        <Route path="/users/:id" element={<UserProfileDetails />} />
         
         
       </Routes>

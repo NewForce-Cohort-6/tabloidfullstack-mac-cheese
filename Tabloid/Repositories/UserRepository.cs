@@ -89,6 +89,7 @@ namespace Tabloid.Repositories
                             CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
                             ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
                             IsActive = DbUtils.GetBoolean(reader, "IsActive"),
+                            UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
                             UserType = new UserType()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
@@ -152,7 +153,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public void UpdateActive(UserProfile user)
+        public void UpdateUser(UserProfile user)
         {
             using (SqlConnection conn = Connection)
             {
@@ -163,16 +164,42 @@ namespace Tabloid.Repositories
                     cmd.CommandText = @"
                             UPDATE UserProfile
                             SET 
-                                IsActive = @isActive
+                                IsActive = @isActive, UserTypeId = @userTypeId
                             WHERE Id = @id";
 
                     cmd.Parameters.AddWithValue("@isActive", user.IsActive);
                     cmd.Parameters.AddWithValue("@id", user.Id);
+                    cmd.Parameters.AddWithValue("@userTypeId", user.UserTypeId);
+
+
 
                     cmd.ExecuteNonQuery();
                 }
             }
         }
+
+        //public void ChangeType(UserProfile user)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"
+        //                    UPDATE UserProfile
+        //                    SET
+        //                        UserTypeId = @userTypeId
+        //                    WHERE Id = @id";
+
+        //            cmd.Parameters.AddWithValue("@userTypeId", user.UserTypeId);
+        //            cmd.Parameters.AddWithValue("@id", user.Id);
+
+        //            cmd.ExecuteNonQuery();
+        //        }
+        //    }
+        //}
+
+
 
         public void Add(UserProfile userProfile)
         {
