@@ -16,6 +16,7 @@ namespace Tabloid.Repositories
             using (var conn = Connection)
             {
                 conn.Open();
+
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
@@ -30,6 +31,7 @@ namespace Tabloid.Repositories
 
                     newComment.Id = (int)cmd.ExecuteScalar();
                 }
+
             }
         }
 

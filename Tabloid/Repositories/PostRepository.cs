@@ -132,7 +132,6 @@ namespace Tabloid.Repositories
                                 Subject = DbUtils.GetString(reader, "Subject"),
                                 Content = DbUtils.GetString(reader, "Content"),
                                 CreateDateTime = DbUtils.GetDateTime(reader, "CommentDateCreated"),
-                                DisplayName = DbUtils.GetString(reader, "DisplayName")
                             });
                         }
                     }
@@ -151,19 +150,22 @@ namespace Tabloid.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT p.Id AS PostId, p.Title, p.CreateDateTime AS PostDateCreated, 
-                       p.ImageLocation AS PostImageUrl, p.UserProfileId,
+                          SELECT p.Id AS 'PostId', p.Title, p.Content AS PostContent, 
+                              p.ImageLocation AS HeaderImage,
+                              p.CreateDateTime AS PostCreateDateTime, p.PublishDateTime, p.IsApproved,
+                              p.CategoryId, p.UserProfileId,
+                              
+                              u.id AS PostUserProfileId, u.FirstName, u.LastName, u.DisplayName, 
+                              u.Email, u.CreateDateTime AS UserProfileCreateDateTime, u.ImageLocation AS AvatarImage,
+                              u.UserTypeId, 
+                              c.Id AS CommentId, c.Subject, c.Content AS CommentContent, c.UserProfileId AS CommentUserProfileId, c.PostId AS PostId, c.CreateDateTime AS CommentCreateDateTime,
+                              up.DisplayName AS CommentDisplayName, up.id AS CommentUserProfileId
+                           FROM Post p
+                               LEFT JOIN UserProfile u ON p.UserProfileId = u.id
+                               LEFT JOIN Comment c on c.PostId = p.id
+                               LEFT JOIN UserProfile up ON c.UserProfileId = up.id
+                               WHERE p.Id = @Id";
 
-                       up.FirstName, up.LastName, up.Email, up.CreateDateTime AS UserProfileDateCreated, 
-                       up.ImageLocation AS UserProfileImageUrl, up.DisplayName,
-
-                       c.Id AS CommentId, c.UserProfileId AS CommentUserProfileId, c.Subject, c.Content, c.CreateDateTime as CommentDateCreated, u.DisplayName AS CommentDisplayName
-                        FROM Post p 
-                       LEFT JOIN UserProfile up ON p.UserProfileId = up.id
-                       LEFT JOIN Comment c on c.PostId = p.Id
-                       LEFT JOIN UserProfile u ON c.UserProfileId = u.id
-                       WHERE p.Id = @Id
-                        ";
                     DbUtils.AddParameter(cmd, "@Id", id);
 
                     var reader = cmd.ExecuteReader();
@@ -177,17 +179,22 @@ namespace Tabloid.Repositories
                             {
                                 Id = id,
                                 Title = DbUtils.GetString(reader, "Title"),
-                                ImageLocation = DbUtils.GetString(reader, "PostImageUrl"),
-                                CreateDateTime = DbUtils.GetDateTime(reader, "PostDateCreated"),
-                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                                Content = DbUtils.GetString(reader, "PostContent"),
+                                CreateDateTime = DbUtils.GetDateTime(reader, "PostCreateDateTime"),
+                                PublishDateTime = (DateTime)DbUtils.GetNullableDateTime(reader, "PublishDateTime"),
+                                ImageLocation = DbUtils.GetString(reader, "HeaderImage"),
+                                UserProfileId = DbUtils.GetInt(reader, "PostUserProfileId"),
+                                CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+
                                 UserProfile = new UserProfile()
                                 {
-                                    Id = DbUtils.GetInt(reader, "UserProfileId"),
+                                    Id = DbUtils.GetInt(reader, "PostUserProfileId"),
                                     FirstName = DbUtils.GetString(reader, "FirstName"),
                                     LastName = DbUtils.GetString(reader, "LastName"),
                                     DisplayName = DbUtils.GetString(reader, "DisplayName"),
-                                    CreateDateTime = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
-                                    ImageLocation = DbUtils.GetString(reader, "UserProfileImageUrl")
+                                    Email = DbUtils.GetString(reader, "Email"),
+                                    CreateDateTime = DbUtils.GetDateTime(reader, "UserProfileCreateDateTime"),
+                                    ImageLocation = DbUtils.GetString(reader, "AvatarImage")
                                 },
                                 Comments = new List<Comment>()
                             };
@@ -197,12 +204,11 @@ namespace Tabloid.Repositories
                             post.Comments.Add(new Comment()
                             {
                                 Id = DbUtils.GetInt(reader, "CommentId"),
-                                PostId = id,
-                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                                Content = DbUtils.GetString(reader, "CommentContent"),
                                 Subject = DbUtils.GetString(reader, "Subject"),
-                                Content = DbUtils.GetString(reader, "Content"),
-                                CreateDateTime = DbUtils.GetDateTime(reader, "CommentDateCreated"),
-                                DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                                PostId = id,
+                                UserProfileId = DbUtils.GetInt(reader, "CommentUserProfileId"),
+                                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CommentCreateDateTime")),
 
                                 UserProfile = new UserProfile()
                                 {
@@ -210,9 +216,11 @@ namespace Tabloid.Repositories
                                     DisplayName = DbUtils.GetString(reader, "CommentDisplayName")
                                 }
                             });
-                        };
+                        }
+
                     }
                     reader.Close();
+
                     return post;
                 }
             }
