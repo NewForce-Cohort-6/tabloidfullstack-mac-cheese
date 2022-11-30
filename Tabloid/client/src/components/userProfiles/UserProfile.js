@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+
 const UserProfile = ({user, get}) => {
 
     const navigate = useNavigate();
+
 
     //Perform a put to update isActive state when button is clicked
     const handleActive = () => {

@@ -5,3 +5,8 @@ export const getAllUsers = () => {
 export const getById = (id) => {
     return fetch(`https://localhost:5001/api/UserProfile/${id}`).then((res) => res.json());
   }
+
+
+  export const getByEmail = (email) => {
+   return fetch(`https://localhost:5001/api/UserProfile/GetByEmail?email=${email}`)
+  }

@@ -10,7 +10,7 @@
     .then((r) => r.json())
       .then((userProfile) => {
         if((userProfile.id)&&(userProfile.isActive == true)){
-          localStorage.setItem("userProfile", JSON.stringify(userProfile));
+          localStorage.setItem("userProfile", JSON.stringify({userProfile}));
           return userProfile
         }
         else{
