@@ -164,12 +164,14 @@ namespace Tabloid.Repositories
                     cmd.CommandText = @"
                             UPDATE UserProfile
                             SET 
-                                IsActive = @isActive, UserTypeId = @userTypeId
+                                IsActive = @isActive, UserTypeId = @userTypeId, ImageLocation = @imageLocation
                             WHERE Id = @id";
 
                     cmd.Parameters.AddWithValue("@isActive", user.IsActive);
                     cmd.Parameters.AddWithValue("@id", user.Id);
                     cmd.Parameters.AddWithValue("@userTypeId", user.UserTypeId);
+                    cmd.Parameters.AddWithValue("@imageLocation", user.ImageLocation);
+
 
 
 

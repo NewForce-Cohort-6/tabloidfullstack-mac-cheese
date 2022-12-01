@@ -1,8 +1,10 @@
 import React from "react";
 import { getById } from "./UserProfileManager";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import 'regenerator-runtime/runtime'
+const {BlobServiceClient} = require("@azure/storage-blob")
 
 const UserProfileDetails = () => {
     const [user, setUser] = useState({})
@@ -11,9 +13,25 @@ const UserProfileDetails = () => {
         selectedFile: null
     })
 
+    const blobSasUrl = "https://testingblobsazure.blob.core.windows.net/?sv=2021-06-08&ss=b&srt=sco&sp=wdlactf&se=2022-12-03T04:26:15Z&st=2022-12-01T20:26:15Z&spr=https&sig=Jtgjkf3qQeL4YBtFE%2BPYEnHJe%2BkQf5XB7MyzFFqaa9g%3D"
+    const blobServiceClient = new BlobServiceClient(blobSasUrl)
+    const containerName = "demo"
+    const containerClient = blobServiceClient.getContainerClient(containerName);
+
+    const navigate = useNavigate()
+
     const userObject = localStorage.getItem('userProfile');
     const loggedInUser = JSON.parse(userObject);
     console.log(loggedInUser)
+
+    const uploadFiles = async() => {
+        const promises = [];
+            const blockBlobClient = containerClient.getBlockBlobClient(file.name)
+            promises.push(blockBlobClient.uploadBrowserData(file))
+
+        await Promise.all(promises)
+        alert('Done')
+    }
 
     useEffect(
     () => {
@@ -26,6 +44,7 @@ const UserProfileDetails = () => {
 
     const fileSelectedHandler = (e) => {
         setFile(e.target.files[0])
+        console.log(e.target.files[0])
     }
 
     const fileUploadHandler = (e) => {
@@ -56,7 +75,7 @@ const UserProfileDetails = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(updateImage), })
-        .then((response) => response.json())
+        .then((response) => response.json()).then(navigate(`/users/${id}`))
     }
 
 console.log(user)
@@ -75,7 +94,7 @@ console.log(user)
                     fileSelectedHandler(e)
                 }}/>
                 <button style={{marginTop: '5px', border: '.5px solid black'}} onClick={(e) => {
-                    fileUploadHandler(e)
+                    uploadFiles(e)
                 }}>Upload</button>
             </div>
             :
