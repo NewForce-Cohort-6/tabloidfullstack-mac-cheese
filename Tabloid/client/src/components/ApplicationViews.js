@@ -5,6 +5,8 @@ import CategoryEdit from "./categories/CategoryEdit";
 import CategoryForm from "./categories/CategoryForm";
 import CategoryList from "./categories/CategoryList";
 import PostList from "./posts/PostList";
+import ReactList from "./reactions/ReactionList";
+import PostDetails from "./posts/PostDetails";
 
 // import { Post } from "./posts/Post";
 import Hello from "./Hello";
@@ -17,25 +19,21 @@ import UserProfileList from "./userProfiles/UserProfileList";
 import TagEdit from "./Tags/TagEdit";
 
 export default function ApplicationViews() {
-
- return(
-      <Routes>
-        <Route path="/" element={<Hello />} />
-        <Route path="/categories" element={<CategoryList />} />
-        <Route path="/createCategory" element={<CategoryForm />} />
-        <Route path="/deleteCategory/:id" element={<CategoryDelete />} />
-        <Route path="/editCategory/:id" element={<CategoryEdit />} />
-        <Route path="/tags" element={<TagList />} />
-        <Route path="/users" element={<UserProfileList />} />
-        <Route path="/createTag" element= { <TagForm />} />
-        <Route path="/posts" element={<PostList />} />
-        <Route path="/deleteTag/:id" element={<TagDelete />} />
-        <Route path="/editTag/:id" element={<TagEdit />} />
-        <Route path="posts/:id" element={<PostDetails />} />
-        
-        
-      </Routes>
-   );
- 
-
+  return (
+    <Routes>
+      <Route path="/" element={<Hello />} />
+      <Route path="/categories" element={<CategoryList />} />
+      <Route path="/createCategory" element={<CategoryForm />} />
+      <Route path="/deleteCategory/:id" element={<CategoryDelete />} />
+      <Route path="/editCategory/:id" element={<CategoryEdit />} />
+      <Route path="/tags" element={<TagList />} />
+      <Route path="/users" element={<UserProfileList />} />
+      <Route path="/createTag" element={<TagForm />} />
+      <Route path="/posts" element={<PostList />} />
+      <Route path="/deleteTag/:id" element={<TagDelete />} />
+      <Route path="/editTag/:id" element={<TagEdit />} />
+      <Route path="posts/:id" element={<PostDetails />} />
+      <Route path="/Reactions" element={<ReactList />} />
+    </Routes>
+  );
 }
