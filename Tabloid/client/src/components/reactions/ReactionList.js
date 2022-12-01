@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Reaction from "./Reaction";
 import { getAllReactions } from "./ReactionManager";
+import { Link } from "react-router-dom";
 
 const ReactList = () => {
   const [reactions, setReactions] = useState([]);
@@ -24,7 +25,11 @@ const ReactList = () => {
             ))}
           </div>
         </div>
+        <Link to={`/Reactions/add`}>
+        <button>Add New Reaction</button>
+      </Link>
       </div>
+      
     </>
   );
 };
