@@ -7,6 +7,7 @@ import CategoryList from "./categories/CategoryList";
 import PostList from "./posts/PostList";
 import ReactList from "./reactions/ReactionList";
 import PostDetails from "./posts/PostDetails";
+import ReactForm from "./reactions/ReactForm";
 
 // import { Post } from "./posts/Post";
 import Hello from "./Hello";
@@ -34,6 +35,7 @@ export default function ApplicationViews() {
       <Route path="/editTag/:id" element={<TagEdit />} />
       <Route path="posts/:id" element={<PostDetails />} />
       <Route path="/Reactions" element={<ReactList />} />
+      <Route path="/Reactions/add" element={<ReactForm />} />
     </Routes>
   );
 }
