@@ -13,10 +13,16 @@ namespace Tabloid.Models
         public string Title { get; set; }
 
         [Required]
+        public string Content { get; set; }
+
+        [Required]
         public string ImageLocation { get; set; }
 
         [Required]
         public DateTime CreateDateTime{ get; set; }
+
+        [Required]
+        public DateTime PublishDateTime { get; set; }
 
         [Required]
         public int UserProfileId { get; set; }

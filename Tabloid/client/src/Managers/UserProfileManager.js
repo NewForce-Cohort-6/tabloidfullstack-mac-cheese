@@ -9,7 +9,7 @@
     return fetch(`${apiUrl}/api/userprofile/getbyemail?email=${userObject.email}`)
     .then((r) => r.json())
       .then((userProfile) => {
-        if((userProfile.id)&&(userProfile.isActive == true)){
+        if((userProfile.id)){
           localStorage.setItem("userProfile", JSON.stringify(userProfile));
           return userProfile
         }
