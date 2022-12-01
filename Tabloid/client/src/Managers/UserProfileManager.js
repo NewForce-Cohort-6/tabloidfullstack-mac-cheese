@@ -1,48 +1,43 @@
+const apiUrl = "https://localhost:5001";
 
-
-
-
-
-  const apiUrl = "https://localhost:5001";
-
-  export const login = (userObject) => {
-    return fetch(`${apiUrl}/api/userprofile/getbyemail?email=${userObject.email}`)
+export const login = (userObject) => {
+  return fetch(`${apiUrl}/api/userprofile/getbyemail?email=${userObject.email}`)
     .then((r) => r.json())
-      .then((userProfile) => {
-        if((userProfile.id)&&(userProfile.isActive == true)){
-          localStorage.setItem("userProfile", JSON.stringify(userProfile));
-          return userProfile
-        }
-        else{
-          return undefined
-        }
-      });
-  };
+    .then((userProfile) => {
+      if (userProfile.id && userProfile.isActive == true) {
+        localStorage.setItem("userProfile", JSON.stringify(userProfile));
+        return userProfile;
+      } else {
+        return undefined;
+      }
+    });
+};
 
-  export const logout = () => {
-        localStorage.clear()
-  };
+export const logout = () => {
+  localStorage.clear();
+};
 
-  export const register = (userObject, password) => {
-    return  fetch(`${apiUrl}/api/userprofile`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userObject),
-    })
+export const register = (userObject, password) => {
+  return fetch(`${apiUrl}/api/userprofile`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userObject),
+  })
     .then((response) => response.json())
-      .then((savedUserProfile) => {
-        localStorage.setItem("userProfile", JSON.stringify(savedUserProfile))
-      });
-  };
+    .then((savedUserProfile) => {
+      localStorage.setItem("userProfile", JSON.stringify(savedUserProfile));
+    });
+};
 
+export const getCurrentUser = () => {
+  const currentUser = localStorage.getItem("userProfile");
+  return JSON.parse(currentUser);
+};
 
-
-
-
-  // return (
-  //   <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register,  }}>
-  //      {props.children}
-  //   </UserProfileContext.Provider>
-  // );
+// return (
+//   <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register,  }}>
+//      {props.children}
+//   </UserProfileContext.Provider>
+// );

@@ -16,8 +16,9 @@ import TagForm from "./Tags/TagForm";
 import TagList from "./Tags/TagList";
 import UserProfileDetails from "./userProfiles/UserProfileDetail";
 import UserProfileList from "./userProfiles/UserProfileList";
-
+import PostDetails from "./posts/PostDetails";
 import TagEdit from "./Tags/TagEdit";
+import { CommentNew } from "./comments/CommentNew";
 
 export default function ApplicationViews() {
   return (
@@ -36,6 +37,7 @@ export default function ApplicationViews() {
       <Route path="posts/:id" element={<PostDetails />} />
       <Route path="/Reactions" element={<ReactList />} />
       <Route path="/Reactions/add" element={<ReactForm />} />
+      <Route path="posts/:id/addComment" element={<CommentNew />} />
     </Routes>
   );
 }

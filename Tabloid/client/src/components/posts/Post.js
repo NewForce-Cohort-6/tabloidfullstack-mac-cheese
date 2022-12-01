@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Card, CardBody, CardTitle } from "reactstrap";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Post = ({ post }) => {
   const { id } = useParams();
@@ -26,7 +27,7 @@ export const Post = ({ post }) => {
         justifyContent: "space-between",
       }}
     >
-      <strong>{post.title}</strong>
+      <Link to={`${post.id}`}>{post.title}</Link>
       <p>
         Author: {post.userProfile.firstName} {post.userProfile.lastName}
       </p>

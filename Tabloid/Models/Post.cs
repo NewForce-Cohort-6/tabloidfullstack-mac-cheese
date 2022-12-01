@@ -28,6 +28,7 @@ namespace Tabloid.Models
         public int CategoryId { get; set; }
 
         public Category Category { get; set; }
-
+        public string Content { get; set; }
+        public DateTime PublishDateTime { get; set; }
     }
 }
